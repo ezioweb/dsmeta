@@ -9,6 +9,8 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
+import java.text.DecimalFormat;
+
 
 @Service
 public class SmsService {
@@ -30,8 +32,9 @@ public class SmsService {
     public void sendSms(Long saleId) {
         Sale sale = saleRepository.findById(saleId).get();
         String date = sale.getDate().getMonthValue()+"/"+sale.getDate().getYear();
-        String msg = "O vendedor " + sale.getSellerName() + " foi destaque em "+date
-                + " com o total de R$ "+String.format("%.2f", sale.getAmount());
+        //String msg = "O vendedor " + sale.getSellerName() + " foi destaque em "+date + " com o total de R$ "+String.format("%.2f", sale.getAmount());
+        String msg = "O vendedor " + sale.getSellerName() + " foi destaque em " + date
+                + " com um total de R$ " + new DecimalFormat("#,##0.00").format(sale.getAmount());
 
         Twilio.init(twilioSid, twilioKey);
 
