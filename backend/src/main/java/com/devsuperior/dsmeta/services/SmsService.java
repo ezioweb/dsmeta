@@ -38,7 +38,7 @@ public class SmsService {
         PhoneNumber to = new PhoneNumber(twilioPhoneTo);
         PhoneNumber from = new PhoneNumber(twilioPhoneFrom);
 
-        Message message = Message.creator(to, from, "teste").create();
+        Message message = Message.creator(to, from, msg).create();
 
         System.out.println(message.getSid());
     }
